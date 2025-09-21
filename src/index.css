@@ -1,0 +1,73 @@
+:root {
+  --orange: #f97316;
+  --orange-hover: #ea580c;
+  --white: #ffffff;
+  --black: #000000;
+  --text-muted: #ccced0;
+
+  --font-base: 'Helvetica', 'Arial', sans-serif;
+  --font-size-base: 1rem;
+  --font-size-small: 0.75rem;
+  --font-size-medium: 0.875rem;
+  --font-size-large: 1.125rem;
+  --font-weight-medium: 500;
+
+}
+
+.bg-orange{
+  background-color: var(--orange);
+}
+
+.bg-black{
+  background-color: var(--black);
+}
+
+.text-orange {
+  color:var(--orange);
+}
+
+.text-grey {
+  color:var(--text-muted);
+}
+
+
+/* font size */
+.fs-small{
+  font-size: var(--font-size-small);
+}
+
+.fs-medium{
+  font-size: var(--font-size-medium);
+}
+
+.fs-large{
+  font-size: var(--font-size-large);
+}
+
+.fw-medium{
+  font-size: var(--font-weight-medium);
+}
+
+
+
+
+
+/* buttons */
+
+.btn-orange {
+  background-color:var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+  font-size: 0.875rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.btn-orange:hover {
+  background-color:var(--orange-hover);
+  border-color:var(--orange);
+  color:var(--white);
+}
+
+

@@ -1,0 +1,10 @@
+.carousel-image {
+  height: 500px; /* ✅ Fixed height */
+  width: 100%; /* keeps it centered, not full screen */
+  object-fit: cover; /* crop instead of stretching */
+  border-radius: 0px; /* smooth edges */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* nice shadow */
+}
+
+
+

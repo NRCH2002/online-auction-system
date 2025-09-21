@@ -1,0 +1,62 @@
+.product-card {
+  width: 280px;
+  margin: 20px auto;
+}
+
+.product-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.orange-badge {
+  background-color:var(--orange) !important;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.btn-orange{
+  background-color:var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+  font-size: 0.875rem;
+}
+
+.btn-orange:hover {
+  background-color:var(--orange-hover);
+  border-color:var(--orange);
+  color:var(--white);
+}
+
+.bid-icon,
+.time-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+}
+
+.card-title {
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+}
+
+.card-text {
+  font-size: 0.875rem !important;
+}
+
+.price-text {
+  font-size: 0.875rem;
+}
+
+.price-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.info-text {
+  font-size: 0.75rem;
+}
+
+.card-body {
+  padding: 1rem !important;
+}

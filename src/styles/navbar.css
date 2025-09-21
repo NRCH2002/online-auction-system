@@ -1,0 +1,54 @@
+/* Brand Styling */
+.brand-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.brand-text .bi-gavel {
+  color: #ff7a00; /* Orange icon */
+  font-size: 1.2rem;
+}
+
+/* Search Bar Styling */
+.search-bar .form-control {
+  border-color: #ddd;
+  box-shadow: none;
+}
+
+.search-bar .form-control:focus {
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 0.2rem rgba(255, 122, 0, 0.25);
+}
+
+.search-bar .input-group-text {
+  border-color: #ddd;
+}
+
+/* Nav Links */
+.nav-link {
+  font-weight: 400;
+  color: #000 !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ff7a00 !important;
+}
+
+
+/* Sign Up Button */
+.btn-orange {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-orange:hover,
+.btn-orange.active {
+  background-color: var(--orange-hover);
+  border-color: var(--orange);
+  color: var(--white);
+}
