@@ -1,11 +1,17 @@
-export type AuctionItem = {
-  id: number;
+export type AuctionType = {
+  id?:string;
+  auctionId: string;
+  userId:string;
   imageUrl: string;
   title: string;
   category: string;
   description: string;
   startingPrice: string;
-  currentBid: string;
+  currentBid: number;
   bidCount: number;
-  timeRemaining: string;
+  productQuality:string;
+  duration: string;
+  status:string;
+  createdAt:string;
+  updatedAt?:string
 };

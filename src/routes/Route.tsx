@@ -2,29 +2,25 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Components
 import ProtectedRoute from "./ProtectedRoute";
-
-// Public Pages
-import Home from "../pages/public/Home";
-import Login from "../pages/public/Login";
-import Signup from "../pages/public/Signup";
-import PublicLayout from "../pages/public/PublicLayout";
+import Login from "../components/Login";
+import Signup from "../components/Signup";
 
 // User Pages
-import UserLayout from "../pages/user/UserLayout";
-import Dashboard from "../pages/user/Dashboard";
-import CreateAuction from "../pages/user/CreateAuction";
-import MyAuctions from "../pages/user/MyAuctions";
-import MyBids from "../pages/user/MyBids";
-import MyPayments from "../pages/user/MyPayments";
-import Notifications from "../pages/user/Notifications";
-import Profile from "../pages/user/Profile";
+import Dashboard from "../components/user/Dashboard";
+import CreateAuction from "../components/user/CreateAuction";
+import MyAuctions from "../components/user/MyAuctions";
+import MyBids from "../components/user/MyBids";
+import MyPayments from "../components/user/MyPayments";
+import Notifications from "../components/user/Notifications";
+import Profile from "../components/Profile";
 
 // Admin Pages
-import AdminLayout from "../pages/admin/AdminLayout";
-import AdminDashboard from "../pages/admin/AdminDashboard";
-import ManageAuctions from "../pages/admin/ManageAuctions";
-import ManageBids from "../pages/admin/ManageBids";
-import ManageUsers from "../pages/admin/ManageUsers";
+import AdminDashboard from "../components/admin/AdminDashboard";
+import ManageAuctions from "../components/admin/ManageAuctions";
+import ManageBids from "../components/admin/ManageBids";
+import ManageUsers from "../components/admin/ManageUsers";
+import RootLayout from "../components/RootLayout";
+import ViewAuction from "../components/user/ViewAuction";
 
 export const Routes = () => {
 
@@ -32,12 +28,13 @@ export const Routes = () => {
     // Public Routes
     {
       path: "/",
-      element: <PublicLayout />,
+      element: <RootLayout />,
       children: [
-        { path: "/", element: <Home /> },
-         { path: "/home", element: <Home /> },
+        { path: "/", element: <Dashboard /> },
+         { path: "/dashboard", element: <Dashboard/> },
         { path: "/login", element: <Login /> },
         { path: "/signup", element: <Signup /> },
+        {path: "/viewauction", element: <ViewAuction /> }
       ],
     },
 
@@ -47,15 +44,16 @@ export const Routes = () => {
       children: [
         {
           path: "/user",
-          element: <UserLayout />,
+          element: <RootLayout />,
           children: [
             { path: "dashboard", element: <Dashboard /> },
-            { path: "auction", element: <CreateAuction /> },
+            { path: "createauction", element: <CreateAuction /> },
             { path: "myauction", element: <MyAuctions /> },
             { path: "mybids", element: <MyBids /> },
             { path: "mypayments", element: <MyPayments /> },
             { path: "notifications", element: <Notifications /> },
             { path: "profile", element: <Profile /> },
+            {path: "viewauction", element: <ViewAuction />}
           ],
         },
       ],
@@ -67,12 +65,12 @@ export const Routes = () => {
       children: [
         {
           path: "/admin",
-          element: <AdminLayout />,
+          element: <RootLayout />,
           children: [
             { path: "dashboard", element: <AdminDashboard /> },
-            { path: "auction", element: <ManageAuctions /> },
-            { path: "bids", element: <ManageBids /> },
-            { path: "users", element: <ManageUsers /> },
+            { path: "manageauction", element: <ManageAuctions /> },
+            { path: "managebids", element: <ManageBids /> },
+            { path: "manageusers", element: <ManageUsers /> },
             { path: "notifications", element: <Notifications /> },
             { path: "profile", element: <Profile /> },
           ],

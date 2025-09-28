@@ -1,0 +1,33 @@
+ span.label{
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--orange);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    
+}
+
+.status{
+  font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: green;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 100px;
+}
+
+h3{
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+

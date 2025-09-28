@@ -1,0 +1,405 @@
+{
+  "users": [
+    {
+      "id": "e067",
+      "adminId": "admin_u2T1",
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "contact": "9994482456",
+      "gender": "male",
+      "role": "admin",
+      "address": {
+        "addressline": "Not Found",
+        "city": "Not Found",
+        "state": "Not Found",
+        "pincode": "Not Found",
+        "country": "Not Found"
+      },
+      "bids": [],
+      "payments": [],
+      "reviews": []
+    },
+    {
+      "id": "e9fb",
+      "userId": "user_0mL8",
+      "name": "Hari Prasad Gurujala",
+      "email": "hari@gmail.com",
+      "password": "hari",
+      "contact": "7654432456",
+      "gender": "male",
+      "role": "user",
+      "address": {
+        "addressline": "RTC X Roads",
+        "city": "Hydarabad",
+        "state": "Telangana",
+        "pincode": "507317",
+        "country": "India"
+      },
+      "bids": [
+        {
+          "bidId": "bidITng",
+          "auctionId": "auction_E9iY",
+          "bidAmount": 5000,
+          "time": "9:23:38 PM",
+          "status": "won"
+        },
+        {
+          "bidId": "bidtM5r",
+          "auctionId": "auction_6Feh",
+          "bidAmount": 2352,
+          "time": "2:41:32 pm",
+          "status": "ongoing"
+        }
+      ],
+      "payments": [],
+      "reviews": []
+    },
+    {
+      "id": "c583",
+      "userId": "user_ukN8",
+      "name": "Nikith Reddy Chittireddy",
+      "email": "nikith@gmail.com",
+      "password": "nikith",
+      "contact": "7654432456",
+      "gender": "male",
+      "role": "user",
+      "address": {
+        "addressline": "RTC X Roads",
+        "city": "Hydarabad",
+        "state": "telangana",
+        "pincode": "506321",
+        "country": "india"
+      },
+      "bids": [
+        {
+          "bidId": "bidOObk",
+          "auctionId": "auction_6Feh",
+          "bidAmount": 2351,
+          "time": "7:29:38 PM",
+          "status": "discarded"
+        },
+        {
+          "bidId": "bidIkqw",
+          "auctionId": "auction_12Ez",
+          "bidAmount": 2005,
+          "time": "8:13:04 PM",
+          "status": "discarded"
+        },
+        {
+          "bidId": "bid88on",
+          "auctionId": "auction_12Ez",
+          "bidAmount": 2007,
+          "time": "8:13:58 PM",
+          "status": "ongoing"
+        }
+      ],
+      "payments": [],
+      "reviews": []
+    },
+    {
+      "id": "2a37",
+      "userId": "user_mffY",
+      "name": "Simpi Sharma",
+      "email": "simpi@gmail.com",
+      "password": "simpi",
+      "contact": "9876543212",
+      "gender": "male",
+      "role": "user",
+      "address": {
+        "addressline": "chennai",
+        "city": "chennai",
+        "state": "Tamil Nadu",
+        "pincode": "632519",
+        "country": "india"
+      },
+      "bids": [],
+      "payments": [],
+      "reviews": []
+    },
+    {
+      "id": "7472",
+      "userId": "user_q773",
+      "name": "Pruthvi Nikhil",
+      "email": "pruthvi@gmail.com",
+      "password": "pruthvi",
+      "contact": "8876543210",
+      "gender": "male",
+      "role": "user",
+      "address": {
+        "addressline": "Ahmedabad",
+        "city": "Ahmedabad",
+        "state": "Gujarat",
+        "pincode": "526119",
+        "country": "india"
+      },
+      "bids": [
+        {
+          "bidId": "bidqxea",
+          "auctionId": "auction_8PWW",
+          "bidAmount": 399292,
+          "time": "7:15:39 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidt1Wu",
+          "auctionId": "auction_12Ez",
+          "bidAmount": 2006,
+          "time": "8:13:34 PM",
+          "status": "discarded"
+        }
+      ],
+      "payments": [],
+      "reviews": []
+    },
+    {
+      "id": "4b25",
+      "userId": "user_ndMV",
+      "name": "tester user",
+      "email": "test@gmail.com",
+      "password": "test",
+      "contact": "999999999",
+      "gender": "female",
+      "role": "user",
+      "address": {
+        "addressline": "texus",
+        "city": "texus",
+        "state": "texus",
+        "pincode": "506372",
+        "country": "usa"
+      },
+      "bids": [],
+      "payments": [],
+      "reviews": []
+    }
+  ],
+  "auctions": [
+    {
+      "id": "1",
+      "userId": "user_ukN8",
+      "auctionId": "auction_RLX1",
+      "imageUrl": "https://images.unsplash.com/photo-1546719900-f350ef5d469d",
+      "title": "Vintage Rolex Submariner",
+      "category": "Watches",
+      "description": "Classic 1960s model in excellent condition.",
+      "startingPrice": 8000,
+      "currentBid": 12500,
+      "bidCount": 15,
+      "productQuality": "Excellent",
+      "duration": "48",
+      "status": "active"
+    },
+    {
+      "id": "105",
+      "userId": "user_XYZ5",
+      "auctionId": "auction_ELC1",
+      "imageUrl": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+      "title": "Apple MacBook Pro M2",
+      "category": "Electronics & Gadgets",
+      "description": "Latest 14-inch MacBook Pro with M2 chip.",
+      "startingPrice": 1500,
+      "currentBid": 2100,
+      "bidCount": 17,
+      "productQuality": "excellent",
+      "duration": "36",
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "userId": "user_0mL8",
+      "auctionId": "auction_VASE2",
+      "imageUrl": "https://images.unsplash.com/photo-1695901741829-7a9cc23d32ac",
+      "title": "Ming Dynasty Vase",
+      "category": "Antiques",
+      "description": "Authentic 15th-century blue & white ceramic.",
+      "startingPrice": 15000,
+      "currentBid": 28000,
+      "bidCount": 23,
+      "productQuality": "Excellent",
+      "duration": "36",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "userId": "user_q773",
+      "auctionId": "auction_VG3",
+      "imageUrl": "https://images.unsplash.com/photo-1664181018522-bbf0da932186",
+      "title": "Van Gogh Study",
+      "category": "Art & Collectibles",
+      "description": "Rare authenticated oil-on-canvas study.",
+      "startingPrice": 50000,
+      "currentBid": 75000,
+      "bidCount": 8,
+      "productQuality": "Excellent",
+      "duration": "72",
+      "status": "active"
+    },
+    {
+      "id": "4",
+      "userId": "user_mffY",
+      "auctionId": "auction_RING4",
+      "imageUrl": "https://images.unsplash.com/photo-1677045419454-e8b201856472",
+      "title": "Diamond Engagement Ring",
+      "category": "Jewelry",
+      "description": "2-carat diamond ring in platinum setting.",
+      "startingPrice": 5000,
+      "currentBid": 7200,
+      "bidCount": 12,
+      "productQuality": "Excellent",
+      "duration": "18",
+      "status": "active"
+    },
+    {
+      "id": "106",
+      "userId": "user_XYZ6",
+      "auctionId": "auction_HOM1",
+      "imageUrl": "https://images.unsplash.com/photo-1713283391486-b92cda2562e8?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Mid-Century Sofa",
+      "category": "Home & Furniture",
+      "description": "Stylish vintage mid-century modern 3-seater sofa.",
+      "startingPrice": 2000,
+      "currentBid": 2460,
+      "bidCount": 8,
+      "productQuality": "excellent",
+      "duration": "48",
+      "status": "active"
+    },
+    {
+      "id": "9",
+      "userId": "user_ukN8",
+      "auctionId": "auction_Byen",
+      "imageUrl": "https://images.unsplash.com/photo-1667013829325-be7dac7d03eb?...",
+      "title": "Ruby Cocktail Ring",
+      "category": "Jewelry",
+      "description": "Bold ruby ring with diamond accents in white gold.",
+      "startingPrice": 2500,
+      "currentBid": 3400,
+      "bidCount": 9,
+      "productQuality": "Excellent",
+      "duration": "10",
+      "status": "active"
+    },
+    {
+      "id": "10",
+      "userId": "user_0mL8",
+      "auctionId": "auction_6Feh",
+      "imageUrl": "https://images.unsplash.com/photo-1583937443351-f2f669fbe2cf?...",
+      "title": "Emerald Pendant",
+      "category": "Jewelry",
+      "description": "Exquisite emerald pendant on delicate gold chain.",
+      "startingPrice": 1800,
+      "currentBid": 2352,
+      "bidCount": 13,
+      "productQuality": "Excellent",
+      "duration": "17",
+      "status": "active"
+    },
+    {
+      "id": "11",
+      "userId": "user_ukN8",
+      "auctionId": "auction_fxLc",
+      "imageUrl": "https://images.unsplash.com/photo-1630019852942-f89202989a59?...",
+      "title": "Sapphire Stud Earrings",
+      "category": "Jewelry",
+      "description": "Royal blue sapphires in classic stud settings.",
+      "startingPrice": 1500,
+      "currentBid": 2100,
+      "bidCount": 7,
+      "productQuality": "Excellent",
+      "duration": "20",
+      "status": "active"
+    },
+    {
+      "id": "12",
+      "userId": "user_mffY",
+      "auctionId": "auction_dNR3",
+      "imageUrl": "https://images.unsplash.com/photo-1726981407933-06fe96c4cefa?...",
+      "title": "Rose Gold Watch",
+      "category": "Watches",
+      "description": "Luxury timepiece with rose gold case and leather band.",
+      "startingPrice": 3200,
+      "currentBid": 4750,
+      "bidCount": 18,
+      "productQuality": "Excellent",
+      "duration": "36",
+      "status": "active"
+    },
+    {
+      "id": "15",
+      "userId": "user_q773",
+      "auctionId": "auction_KXIh",
+      "imageUrl": "https://images.unsplash.com/photo-1639065643006-e217c4fee12e?...",
+      "title": "Diamond Tennis Bracelet",
+      "category": "Jewelry",
+      "description": "Sparkling tennis bracelet with perfect diamond line.",
+      "startingPrice": 4500,
+      "currentBid": 6200,
+      "bidCount": 22,
+      "productQuality": "Excellent",
+      "duration": "30",
+      "status": "active"
+    },
+    {
+      "id": "864f",
+      "auctionId": "auction_E9iY",
+      "userId": "user_ukN8",
+      "imageUrl": "https://images.unsplash.com/photo-1695728189457-b6769e702a37?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Rolex Vintage Retro",
+      "category": "Watches",
+      "description": "Stylish Retro Vintage Rolex ",
+      "startingPrice": "5000",
+      "currentBid": 5000,
+      "bidCount": 1,
+      "productQuality": "excellent",
+      "duration": "12",
+      "status": "sold",
+      "createdAt": "9:06:11 PM"
+    },
+    {
+      "id": "f9e3",
+      "auctionId": "auction_G4bV",
+      "userId": "user_ukN8",
+      "imageUrl": "https://images.unsplash.com/photo-1459603677915-a62079ffd002?q=80&w=2134&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Yellow vintage car",
+      "category": "Vechices",
+      "description": "Yellow vintage car model 1957 model",
+      "startingPrice": "7000",
+      "currentBid": 0,
+      "bidCount": 0,
+      "productQuality": "excellent",
+      "duration": "36",
+      "status": "unsold",
+      "createdAt": "9:25:56 PM"
+    },
+    {
+      "id": "103",
+      "userId": "user_XYZ3",
+      "auctionId": "auction_ART1",
+      "imageUrl": "https://images.unsplash.com/photo-1746969750504-2022e28fed88?q=80&w=1108&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Picasso Lithograph",
+      "category": "Art & Collectibles",
+      "description": "Authentic signed limited-edition lithograph.",
+      "startingPrice": 12000,
+      "currentBid": 15300,
+      "bidCount": 6,
+      "productQuality": "excellent",
+      "duration": "72",
+      "status": "active"
+    },
+    {
+      "id": "104",
+      "userId": "user_XYZ4",
+      "auctionId": "auction_FSH1",
+      "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "title": "Gucci Leather Handbag",
+      "category": "Fashion & Accessories",
+      "description": "Classic black leather handbag with gold accents.",
+      "startingPrice": 1200,
+      "currentBid": 1875,
+      "bidCount": 14,
+      "productQuality": "excellent",
+      "duration": "30",
+      "status": "active"
+    }
+  ]
+}

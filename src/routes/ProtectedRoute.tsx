@@ -1,11 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+
 type Props = {
   role?: "user" | "admin"; // Optional role requirement
 };
 
 const ProtectedRoute = ({ role }: Props) => {
+
+  
   const { user } = useAuth();
 
   // 1️⃣ If not logged in → redirect to login

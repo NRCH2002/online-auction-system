@@ -15,19 +15,19 @@
 }
 
 .bg-orange{
-  background-color: var(--orange);
+  background-color: var(--orange) !important;
 }
 
 .bg-black{
-  background-color: var(--black);
+  background-color: var(--black) !important;
 }
 
 .text-orange {
-  color:var(--orange);
+  color:var(--orange) !important;
 }
 
 .text-grey {
-  color:var(--text-muted);
+  color:var(--text-muted) !important;
 }
 
 
@@ -69,5 +69,13 @@
   border-color:var(--orange);
   color:var(--white);
 }
+
+.btn-orange:active,
+.btn-orange:focus {
+  background-color: var(--orange-hover);
+  color: var(--black);
+  outline: none;
+}
+
 
 
