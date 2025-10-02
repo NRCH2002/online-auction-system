@@ -31,7 +31,7 @@ export default function AuctionCarousel() {
   return (
     <div
       id="carouselExample"
-      className="carousel slide"
+      className="carousel slide" 
       data-bs-ride="carousel"
       data-bs-interval="2000"
     >

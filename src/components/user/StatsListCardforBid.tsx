@@ -1,6 +1,7 @@
 import { useAuctionContext } from "../../context/AuctionContext";
 import { useAuth } from "../../context/AuthContext";
 import { deleteBid } from "../../services/deleteBid";
+import { useCountDown } from "../../services/useCountDown";
 import "../../styles/statsCardList.css";
 import type { AuctionType } from "../../types/AuctionType";
 import type { BidType } from "../../types/BidType";
@@ -14,6 +15,7 @@ type StatsCardListProps = {
 function StatsListCardForBids({ auctionItem, bid }: StatsCardListProps) {
   const { auctionItems, setAuctionItems } = useAuctionContext();
   const { user, setUser } = useAuth();
+  const timeLeft = useCountDown(auctionItem.endTime)
   const navigate = useNavigate();
 
   const deleteBid1 = async () => {
@@ -23,10 +25,8 @@ function StatsListCardForBids({ auctionItem, bid }: StatsCardListProps) {
     if (res) {
       const { updatedUser, updatedAuction } = res;
 
-      // ✅ update user state with returned updatedUser
       setUser(updatedUser);
 
-      // ✅ update auction items in context correctly
       const updatedAuctions = auctionItems.map((auction: AuctionType) =>
         auction.id === updatedAuction.id ? updatedAuction : auction
       );
@@ -39,7 +39,7 @@ function StatsListCardForBids({ auctionItem, bid }: StatsCardListProps) {
     <div>
       <div
         className="card border-1 rounded-4 shadow-sm overflow-hidden mx-auto"
-        style={{ maxWidth: "24rem" }}
+        style={{ maxWidth: "24rem",minHeight:"540px" }}
       >
         <div className="position-relative" style={{ height: "12rem" }}>
           <img
@@ -77,14 +77,14 @@ function StatsListCardForBids({ auctionItem, bid }: StatsCardListProps) {
           </p>
 
           {bid.status !== "won" && (
-            <div className="d-flex align-items-center mb-3 text-muted small">
+            <div className="d-flex align-items-center justify-content-evenly mb-3 text-muted small">
               <div className="d-flex align-items-center me-4">
                 <i className="bi bi-people-fill me-2"></i>
                 <span>{auctionItem.bidCount} bids</span>
               </div>
               <div className="d-flex align-items-center">
                 <i className="bi bi-clock-fill me-2"></i>
-                <span>{auctionItem.duration}h remaining</span>
+                <span>{timeLeft}</span>
               </div>
             </div>
           )}

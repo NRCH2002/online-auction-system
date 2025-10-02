@@ -9,14 +9,15 @@
             return auctions
         }
          else {
-            alert("Failed to fetch users, status: " + res.status);
+            alert("Failed to fetch auctions, status: " + res.status);
             return null;
         }
 
     }
     catch(err){
         console.log(err)
-        alert("Error While Getting Users")
+        alert("Error While Getting auctions")
+        console.log(err)
         return null;
 
     }

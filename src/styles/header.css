@@ -52,3 +52,8 @@
   border-color: var(--orange);
   color: var(--white);
 }
+
+
+.navbar-nav .nav-item {
+  white-space: nowrap;
+}

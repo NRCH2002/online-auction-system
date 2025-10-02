@@ -4,7 +4,7 @@ import type { AuctionType } from "../types/AuctionType";
 
 export const deleteBid = async (user: UserType, bid: BidType) => {
   try {
-    // 1. Remove bid from user
+    // Remove bid from user
     const updatedBids = user.bids.filter((b: BidType) => b.bidId !== bid.bidId);
 
     const userRes = await fetch(`http://localhost:3000/users/${user.id}`, {
@@ -19,7 +19,7 @@ export const deleteBid = async (user: UserType, bid: BidType) => {
     }
     const updatedUser: UserType = await userRes.json();
 
-    // 2. Fetch all auctions to find the one by auctionId
+    // Fetch all auctions to find the one by auctionId
     const allAuctionsRes = await fetch(`http://localhost:3000/auctions`);
     if (!allAuctionsRes.ok) {
       alert("Failed to fetch auctions, status: " + allAuctionsRes.status);
@@ -33,7 +33,7 @@ export const deleteBid = async (user: UserType, bid: BidType) => {
       return null;
     }
 
-    // 3. Update bidCount in the auction
+    // Update bidCount in the auction
     const updatedAuctionData = {
       bidCount: Math.max(auction.bidCount - 1, 0),
     };

@@ -26,7 +26,7 @@ export const updatedAuctionBid = async (newBid: BidType | null = null): Promise<
       currentBid: newBid.bidAmount,
     };
 
-    // 3. PATCH request to update the auction
+    // PATCH request to update the auction
     const updateRes = await fetch(`http://localhost:4000/auctions/${auction.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

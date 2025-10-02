@@ -3,20 +3,21 @@ import { useNavigate } from "react-router-dom";
 import type { UserType } from "../types/UserType";
 import { useAuth } from "../context/AuthContext";
 import { generateId } from "../services/generateId";
+import { country } from "../data/country";
 
 const Signup = () => {
   const { signup, user } = useAuth();
-  
+
   let id = generateId("user_");
 
   const navigate = useNavigate();
   const [form, setForm] = useState<UserType>({
-    userId : id,
+    userId: id,
     name: "",
     email: "",
     password: "",
     contact: "",
-    gender: "male",
+    gender: "",
     role: "user",
     address: {
       addressline: "",
@@ -37,26 +38,54 @@ const Signup = () => {
     passwordError: "",
     contactError: "",
     genderError: "",
+    addressError: {
+      addressline: "",
+      city: "",
+      state: "",
+      pincode: "",
+      country: "",
+    },
   });
 
- const handleChange = (
-  e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-) => {
-  const { name, value } = e.target;
+  let [selectedCountryStates, setSelectedCountryStates] = useState<string[]>([]);
 
-  if (["city", "state", "country", "pincode", "addressline"].includes(name)) {
-    setForm({
-      ...form,
-      address: {
-        ...form.address,
-        [name]: value,
-      },
-    });
-  } else {
-    setForm({ ...form, [name]: value });
-  }
-};
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
+    if (["city", "state", "country", "pincode", "addressline"].includes(name)) {
+      setForm({
+        ...form,
+        address: {
+          ...form.address,
+          [name]: value,
+        },
+      });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
+    if (name === "country") {
+      if (value === "india") {
+        setSelectedCountryStates(country[0].states);
+      } else if (value === "usa") {
+        setSelectedCountryStates(country[1].states);
+      } else {
+        setSelectedCountryStates([]);
+      }
+    }
+
+    // Clear error message for the field being edited
+
+    if (["addressline", "city", "state", "pincode", "country"].includes(name)) {
+      setErrorMsg({
+        ...errorMsg,
+        addressError: { ...errorMsg.addressError, [`${name}`]: "" },
+      });
+    } 
+    else{setErrorMsg({ ...errorMsg, [`${name}Error`]: "" });}
+    
+  };
 
   const handleErrors = () => {
     let nameError = "";
@@ -64,23 +93,67 @@ const Signup = () => {
     let passwordError = "";
     let contactError = "";
     let genderError = "";
-    // let addressError: []
+    let addressError: {
+      addressline: string;
+      city: string;
+      state: string;
+      pincode: string;
+      country: string;
+    } = { addressline: "", city: "", state: "", pincode: "", country: "" };
     if (!form.name.trim()) {
       nameError = "Name is Required";
+    } else if (form.name.trim() && form.name.trim().length < 4) {
+      nameError = "Name must be at least 4 characters long";
     }
+
     if (!form.email.trim()) {
       emailError = "Email is Required";
+    } else if (
+      form.email.trim() &&
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(form.email.trim())
+    ) {
+      emailError = "Invalid email address format";
     }
+
     if (!form.password.trim()) {
       passwordError = "Password is Required";
+    } else if (form.password.trim() && form.password.trim().length < 6) {
+      passwordError = "Password must be at least 6 characters long";
     }
+
     if (!form.contact.trim()) {
       contactError = "Contact is Required";
+    } else if (
+      (form.contact.trim() && form.contact.trim().length < 10) ||
+      form.contact.trim().length > 10
+    ) {
+      contactError = "Contact must be 10 digits long";
+    }
+
+    if (!form.address.addressline.trim()) {
+      addressError.addressline = "Address line is Required";
+    }
+    if (!form.address.city.trim()) {
+      addressError.city = "City is Required";
+    }
+    if (!form.address.state.trim()) {
+      addressError.state = "State is Required";
+    }
+    if (!form.address.pincode) {
+      addressError.pincode = "Pincode is Required";
+    } else if (
+      form.address.pincode &&
+      (Number(form.address.pincode) < 100000 ||
+        Number(form.address.pincode) > 999999)
+    ) {
+      addressError.pincode = "Pincode must be 6 digits long";
+    }
+    if (!form.address.country.trim()) {
+      addressError.country = "Country is Required";
     }
     if (!form.gender.trim()) {
-      genderError = "Game is Required";
+      genderError = "Gender is Required";
     }
-    // if(!form.name.trim()){ nameError="Name is Required"}
 
     setErrorMsg({
       nameError,
@@ -88,10 +161,20 @@ const Signup = () => {
       passwordError,
       contactError,
       genderError,
+      addressError,
     });
 
     return (
-      nameError || emailError || passwordError || contactError || genderError
+      nameError ||
+      emailError ||
+      passwordError ||
+      contactError ||
+      genderError ||
+      addressError.addressline ||
+      addressError.city ||
+      addressError.state ||
+      addressError.pincode ||
+      addressError.country
     );
   };
 
@@ -120,11 +203,12 @@ const Signup = () => {
         maxWidth: "80vw",
         margin: "1rem auto",
         padding: "2rem",
-        border: "1px solid #ccc",
+
         borderRadius: "8px",
       }}
+      className="bg-white shadow"
     >
-      <h2 className="text-center mb-4">Create an Account</h2>
+      <h4 className="text-center mb-4 fw-bold">Create an Account</h4>
       <form onSubmit={handleSubmit}>
         <div className="row">
           {/* Full Name */}
@@ -149,7 +233,7 @@ const Signup = () => {
               type="email"
               name="email"
               className="form-control"
-              value={form.email}
+              // value={form.email}
               onChange={handleChange}
               placeholder="Enter your email"
             />
@@ -222,14 +306,11 @@ const Signup = () => {
                   checked={form.gender === "female"}
                   onChange={handleChange}
                   className="form-check-input"
-                  required
+                  
                 />
                 <label htmlFor="female" className="form-check-label">
                   Female
                 </label>
-                {errorMsg.genderError !== "" && (
-                  <span className="text-danger">{errorMsg.genderError}</span>
-                )}
               </div>
 
               <div className="form-check">
@@ -241,13 +322,17 @@ const Signup = () => {
                   checked={form.gender === "other"}
                   onChange={handleChange}
                   className="form-check-input"
-                  required
+                  
                 />
                 <label htmlFor="other" className="form-check-label">
                   Other
                 </label>
               </div>
+
             </div>
+            {errorMsg.genderError !== "" && (
+                  <span className="text-danger">{errorMsg.genderError}</span>
+                )}
           </div>
 
           {/* Address */}
@@ -262,7 +347,13 @@ const Signup = () => {
                 onChange={handleChange}
                 placeholder="addressline"
               />
+              {errorMsg.addressError.addressline !== "" && (
+                <span className="text-danger">
+                  {errorMsg.addressError.addressline}
+                </span>
+              )}
             </div>
+
             <div className="d-flex gap-3 mb-2">
               <div className="w-50">
                 <input
@@ -273,7 +364,13 @@ const Signup = () => {
                   onChange={handleChange}
                   placeholder="City"
                 />
+                {errorMsg.addressError.city !== "" && (
+                  <span className="text-danger">
+                    {errorMsg.addressError.city}
+                  </span>
+                )}
               </div>
+
               <div className="w-50">
                 <input
                   type="number"
@@ -286,33 +383,63 @@ const Signup = () => {
                   min={100000}
                   max={999999}
                 />
+                {errorMsg.addressError.pincode !== "" && (
+                  <span className="text-danger">
+                    {errorMsg.addressError.pincode}
+                  </span>
+                )}
               </div>
             </div>
+
             <div className="d-flex gap-3 mb-2">
-              <select
-                className="form-select"
-                name="country"
-                value={form.address.country}
-                onChange={handleChange}
-              >
-                <option value="" hidden>
-                  Select Country
-                </option>
-                <option value="india">India</option>
-                <option value="usa">Usa</option>
-              </select>
-              <select
-                className="form-select"
-                name="state"
-                value={form.address.state}
-                onChange={handleChange}
-              >
-                <option value="" hidden>
-                  Select State
-                </option>
-                <option value="andra">Andra Pradesh</option>
-                <option value="telangana">Telangana</option>
-              </select>
+              <div className="w-50">
+                <select
+                  className="form-select"
+                  name="country"
+                  value={form.address.country}
+                  onChange={handleChange}
+                >
+                  <option value="" hidden>
+                    Select Country
+                  </option>
+                  {country.map((c) => (
+                  <option
+                    key={c.country}
+                    value={c.country.toLowerCase().replace(" ", "")}
+                  >
+                    {c.country}
+                  </option>
+                  ))}
+                </select>
+                {errorMsg.addressError.country !== "" && (
+                  <span className="text-danger">
+                    {errorMsg.addressError.country}
+                  </span>
+                )}
+              </div>
+
+              <div className="w-50">
+                <select
+                  className="form-select"
+                  name="state"
+                  value={form.address.state}
+                  onChange={handleChange}
+                >
+                  <option value="" hidden>
+                    Select State
+                  </option>
+                  {selectedCountryStates.map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+                {errorMsg.addressError.state !== "" && (
+                  <span className="text-danger">
+                    {errorMsg.addressError.state}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 

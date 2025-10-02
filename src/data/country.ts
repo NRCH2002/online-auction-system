@@ -1,6 +1,6 @@
 import type { Country } from "../types/Country";
 
-export let data: Country[] = [
+export let country: Country[] = [
   {
     country: "India",
     states: [
@@ -17,7 +17,7 @@ export let data: Country[] = [
     ]
   },
   {
-    country: "US",
+    country: "Usa",
     states: [
       "Texas",
       "California",

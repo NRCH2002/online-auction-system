@@ -3,10 +3,12 @@ import { useAuth } from "../../context/AuthContext";
 import { useAuctionContext } from "../../context/AuctionContext";
 import { StatsCard } from "../StatsCard";
 import StatsCardList from "./StatsCardList";
+import { useNavigate } from "react-router-dom";
 
 function MyAuctions() {
   let { user } = useAuth();
   let { auctionItems } = useAuctionContext();
+  let navigate = useNavigate();
   let userAuctions = auctionItems.filter((a) => a.userId === user?.userId);
 
   let statsData = [
@@ -34,7 +36,7 @@ function MyAuctions() {
       <h2 className="mb-4">My Auctions</h2>
 
       {/* Stats Cards */}
-      <div className="d-flex  gap-3 mb-4 w-100">
+      <div className="d-flex justify-content-evenly gap-1 mb-4 w-100">
         {statsData.map((Obj, index) => (
           <StatsCard
             key={index}
@@ -58,9 +60,22 @@ function MyAuctions() {
       </div>
     </div>
   ) : (
-    <div className="container mx-auto p-4 text-center h-100">
-      <p className="text-muted">You have not created any auctions yet.</p>
+    <div className="d-flex justify-content-center align-items-center flex-column text-center"
+     style={{ minHeight: "60vh" }}>
+  <div className="card shadow-sm p-4 border-0" style={{ maxWidth: "500px" }}>
+    <div className="card-body">
+      <i className="bi bi-box-seam text-orange fs-1 mb-3"></i>
+      <h5 className="fw-bold mb-2">No Auctions Yet</h5>
+      <p className="text-muted mb-3">
+        You have not created any auctions yet. Start by creating your first auction.
+      </p>
+      <button className="btn btn-orange rounded-pill" onClick={()=>navigate("/user/createauction")}>
+        Create Auction
+      </button>
     </div>
+  </div>
+</div>
+
   );
 }
 

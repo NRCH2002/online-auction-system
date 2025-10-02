@@ -5,6 +5,7 @@ import { useAuctionContext } from "../../context/AuctionContext";
 import { useAuth } from "../../context/AuthContext";
 import { useState, type ChangeEvent } from "react";
 import { patchAuction } from "../../services/patchAuction";
+import { useCountDown } from "../../services/useCountDown";
 
 type StatsCardListProps = {
   auctionItem: AuctionType;
@@ -13,12 +14,14 @@ type StatsCardListProps = {
 function StatsCardList({ auctionItem }: StatsCardListProps) {
   const { auctionItems, setAuctionItems } = useAuctionContext();
   const { user, setUser } = useAuth();
+   const timeLeft = useCountDown(auctionItem.endTime)
 
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState({
     description: auctionItem.description,
-    startingPrice: auctionItem.startingPrice,
-    duration: auctionItem.duration,
+    startingPrice: (Number(auctionItem.startingPrice)===0)? "Enter amount": auctionItem.startingPrice,
+    endTime: new Date(auctionItem.endTime).getHours().toString()
+,
   });
 
   const deleteAuction1 = async () => {
@@ -47,21 +50,47 @@ function StatsCardList({ auctionItem }: StatsCardListProps) {
   }));
   };
 
-  const saveChanges = async () => {
-    const updatedItem = { ...auctionItem, ...editData };
-    let res = await patchAuction(updatedItem)
-    if(res){
-      let updatedAuctions = auctionItems.map((a) =>a.auctionId === auctionItem.auctionId ? updatedItem : a)
-    setAuctionItems(updatedAuctions);
-    }
-    setShowModal(false);
+ const saveChanges = async () => {
+  const now = new Date();
+  const hours = Number(editData.endTime);
+  const updatedEndTime = new Date(now.getTime() + hours * 60 * 60 * 1000);
+
+  if (Number(editData.startingPrice) < Number(auctionItem.currentBid)) {
+    alert("Starting price cannot be less than current bid");
+    return;
+  }
+
+  let updatedAuction: AuctionType = {
+    ...auctionItem,
+    description: editData.description,
+    startingPrice: editData.startingPrice,
+    endTime: updatedEndTime.toISOString(),
   };
+
+  if (Number(editData.startingPrice) > Number(auctionItem.currentBid)) {
+    updatedAuction = {
+      ...updatedAuction,
+      currentBid: 0,
+      bidCount: 0,
+    };
+  }
+
+  patchAuction(updatedAuction)
+
+  const updatedAuctions = auctionItems.map((a) =>
+      a.auctionId === auctionItem.auctionId ? updatedAuction : a
+    );
+    setAuctionItems(updatedAuctions);
+    setShowModal(false)
+};
+
+
 
   return (
     <div>
       <div
-        className="card border-1 rounded-4 shadow-sm overflow-hidden mx-auto"
-        style={{ maxWidth: "24rem" }}
+        className="card border-1 rounded-4 shadow-sm overflow-hidden mx-auto "
+        style={{ maxWidth: "24rem",minHeight:"540px" }}
       >
         <div className="position-relative" style={{ height: "12rem" }}>
           <img
@@ -97,14 +126,14 @@ function StatsCardList({ auctionItem }: StatsCardListProps) {
             {auctionItem.description}
           </p>
 
-          <div className="d-flex align-items-center mb-3 text-muted small">
-            <div className="d-flex align-items-center me-4">
+          <div className="d-flex align-items-center justify-content-evenly mb-3 text-muted small">
+            <div className="d-flex align-items-center">
               <i className="bi bi-people-fill me-2"></i>
               <span>{auctionItem.bidCount} bids</span>
             </div>
             <div className="d-flex align-items-center">
               <i className="bi bi-clock-fill me-2"></i>
-              <span>{auctionItem.duration}h remaining</span>
+              <span>{timeLeft==="NaN:NaN:NaN"?"Auction Completed":timeLeft}</span>
             </div>
           </div>
 
@@ -170,7 +199,7 @@ function StatsCardList({ auctionItem }: StatsCardListProps) {
                 <h5 className="modal-title">Edit Auction</h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-close btn-outline-danger"
                   onClick={() => setShowModal(false)}
                 ></button>
               </div>
@@ -195,12 +224,12 @@ function StatsCardList({ auctionItem }: StatsCardListProps) {
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Duration (hours)</label>
+                  <label className="form-label">End Time (hours)</label>
                   <input
                     type="number"
-                    name="duration"
+                    name="endTime"
                     className="form-control"
-                    value={editData.duration}
+                    value={editData.endTime}
                     onChange={inputHandle}
                   />
                 </div>
@@ -208,14 +237,7 @@ function StatsCardList({ auctionItem }: StatsCardListProps) {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
-                  onClick={() => setShowModal(false)}
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
+                  className="btn btn-orange"
                   onClick={saveChanges}
                 >
                   Save changes

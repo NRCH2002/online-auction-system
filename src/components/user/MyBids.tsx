@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useAuctionContext } from "../../context/AuctionContext";
 import { StatsCard } from "../StatsCard";
 import StatsListCardForBids from "./StatsListCardforBid";
+import { useNavigate } from "react-router-dom";
 
 function MyBids() {
   let { user } = useAuth();
@@ -10,6 +11,7 @@ function MyBids() {
 
   let auctionIds = bids.map((a) => a.auctionId);
   let { auctionItems } = useAuctionContext();
+  let navigate = useNavigate();
 
   // Filter auction items that the user has bid on
   let bidedAuctions = auctionItems.filter((auction) =>
@@ -66,9 +68,22 @@ function MyBids() {
       </div>
     </div>
   ) : (
-    <div className="container mx-auto p-4 text-center">
-      <p className="text-muted">You have not placed any bids yet.</p>
+    <div className="d-flex justify-content-center align-items-center flex-column text-center"
+     style={{ minHeight: "60vh" }}>
+  <div className="card shadow-sm p-4 border-0" style={{ maxWidth: "500px" }}>
+    <div className="card-body">
+      <i className="bi bi-gem text-orange fs-1 mb-3"></i>
+      <h5 className="fw-bold mb-2">No Bids Placed Yet</h5>
+      <p className="text-muted mb-3">
+        You have not placed any bids yet. Explore auctions and place your bids.
+      </p>
+      <button className="btn btn-orange px-4 py-2 rounded-pill" onClick={()=>navigate("/auctions")}>
+        Browse Auctions
+      </button>
     </div>
+  </div>
+</div>
+
   );
 }
 

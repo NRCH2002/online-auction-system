@@ -1,9 +1,10 @@
 import type { AuctionType } from "../types/AuctionType";
 import type { UserType } from "../types/UserType";
+import { getUsers } from "./getUsers";
 
 export const deleteAuction = async (auction: AuctionType) => {
   try {
-    // 1️⃣ Delete the auction
+    //  Delete the auction
     const res = await fetch(`http://localhost:3000/auctions/${auction.id}`, {
       method: "DELETE",
     });
@@ -12,12 +13,10 @@ export const deleteAuction = async (auction: AuctionType) => {
       return null;
     }
 
-    // 2️⃣ Fetch all users
-    const usersRes = await fetch(`http://localhost:3000/users`);
-    if (!usersRes.ok) throw new Error("Failed to fetch users");
-    const users: UserType[] = await usersRes.json();
+    // Fetch all users
+    const users: UserType[] = await getUsers()
 
-    // 3️⃣ Remove bids that belong to deleted auction
+    // Remove bids that belong to deleted auction
     for (let user of users) {
       const updatedBids = user.bids.filter(bid => bid.auctionId !== auction.auctionId);
       if (updatedBids.length !== user.bids.length) {

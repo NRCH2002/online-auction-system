@@ -1,42 +1,73 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generateId } from "../../services/generateId";
-// import { patchUser } from "../../services/patchUser";
 import { useAuth } from "../../context/AuthContext";
 import { useAuctionContext } from "../../context/AuctionContext";
 import { patchAuction } from "../../services/patchAuction";
 import { patchBid } from "../../services/patchbid";
+import { useCountDown } from "../../services/useCountDown";
+
 
 function ViewAuction() {
   let { state } = useLocation();
   let navigate = useNavigate();
   let { user, setUser } = useAuth();
   let { auctionItems, setAuctionItems } = useAuctionContext();
+     const timeLeft = useCountDown(state.endTime)
 
   let id = generateId("bid");
-  let currentBid = Number(state.currentBid) > 0 ? Number(state.currentBid) + 1 : Number(state.startingPrice)
+  let currentBid = Number(state.currentBid) > 0 ? Number(state.currentBid) : Number(state.startingPrice)
 
   let [bidder, setBidder] = useState({
     bidId: id,
     auctionId: state.auctionId,
-    bidAmount:currentBid,
+    bidAmount:0, 
     time: new Date().toLocaleTimeString(),
     status: "ongoing",
   });
 
+  let [bidError,setBidError] = useState("")
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setBidder({ ...bidder, [name]: value });
+    setBidError("")
   };
 
+  const handleBidError=function()
+  {
+    if(user?.userId===state.userId){
+      return "You cannot bid on your own auction"
+    }
+    if(user?.bids.some((bid)=>bid.auctionId===state.auctionId&&bid.status==="ongoing")){
+      return "You have already placed a bid on this auction"
+    }
+    if(!bidder.bidAmount){
+       return "Enter Your Bid"
+    }
+    else if(bidder.bidAmount&&bidder.bidAmount<=currentBid){
+      return `Your Bid Should Be Greater Than ${currentBid}`
+    }
+    return ""
+  }
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    let error = handleBidError()
+    if(error){
+      setBidError(error)
+      return
+    }
+    
+
     if (!user) {
       navigate("/login")
       return;
     }
 
-    const userUpdated = await patchBid(user, bidder); // patch user with new bid
+    
+
+    const userUpdated = await patchBid(user, bidder); 
     const auctionUpdated = await patchAuction({
       ...state,
       currentBid: bidder.bidAmount,
@@ -106,7 +137,7 @@ function ViewAuction() {
             <strong>Bid Count:</strong> {state.bidCount}
           </p>
           <p>
-            <strong>Time Left:</strong> {state.duration}h
+            <strong>Time Left:</strong> {timeLeft}h
           </p>
 
           <form className="mb-3 form-floating" onSubmit={handleSubmit}>
@@ -114,15 +145,14 @@ function ViewAuction() {
               type="number"
               className="form-control w-50"
               id="bidAmount"
-              placeholder="Enter your bid"
-              min={currentBid}
+              placeholder={`Enter your bid more ${currentBid}`}
+              
               onChange={handleInputChange}
               name="bidAmount"
-              value={bidder.bidAmount}
-              required
+              
             />
             <label htmlFor="bidAmount" className="form-label">
-              Your Bid Amount
+              {`Enter your bid more than ${currentBid}`}
             </label>
             <div className="d-flex gap-3 mt-4">
               <button className="btn btn-orange" type="submit">
@@ -130,6 +160,7 @@ function ViewAuction() {
               </button>
             </div>
           </form>
+          {bidError&&<p className="text-danger fw-bold">{bidError}</p>}
         </div>
       </div>
     </div>

@@ -23,9 +23,9 @@ const CreateAuction = () => {
     currentBid: 0,
     bidCount: 0,
     productQuality: "excellent",
-    duration: "",
+    endTime: "",
     status: "active",
-    createdAt: new Date().toLocaleTimeString(),
+    createdAt: new Date().toISOString(),
   });
 
   const [submitMessage, setSubmitMessage] = useState<string>("Create");
@@ -33,7 +33,7 @@ const CreateAuction = () => {
     titleError: "",
     imageUrlError: "",
     startingPriceError: "",
-    durationError: "",
+    endTimeError: "",
     categoryError: "",
     productQualityError: "",
     descriptionError: "",
@@ -53,16 +53,19 @@ const CreateAuction = () => {
     let titleError = "";
     let imageUrlError = "";
     let startingPriceError = "";
-    let durationError = "";
+    let endTimeError = "";
     let categoryError = "";
     let productQualityError = "";
     let descriptionError = "";
 
     if (!auctionForm.title.trim()) titleError = "Title is required";
     if (!auctionForm.imageUrl.trim()) imageUrlError = "Image URL is required";
-    if (!auctionForm.startingPrice.trim())
-      startingPriceError = "Starting price is required";
-    if (!auctionForm.duration.trim()) durationError = "Time Duration is required";
+    if (!auctionForm.startingPrice.trim()) startingPriceError = "Starting price is required";
+    else if (isNaN(Number(auctionForm.startingPrice)) || Number(auctionForm.startingPrice) < 100)
+      startingPriceError = "Starting price must and at least 100";
+    if (!auctionForm.endTime.trim()) endTimeError = "End Time is required";
+    else if (isNaN(Number(auctionForm.endTime)) || Number(auctionForm.endTime) < 10 || Number(auctionForm.endTime) > 48)
+      endTimeError = "End Time must be a number between 10 and 48 hours";
     if (!auctionForm.category.trim()) categoryError = "Category is required";
     if (!auctionForm.productQuality.trim())
       productQualityError = "Product quality is required";
@@ -73,7 +76,7 @@ const CreateAuction = () => {
       titleError,
       imageUrlError,
       startingPriceError,
-      durationError,
+      endTimeError,
       categoryError,
       productQualityError,
       descriptionError,
@@ -83,29 +86,43 @@ const CreateAuction = () => {
       titleError ||
       imageUrlError ||
       startingPriceError ||
-      durationError ||
+      endTimeError ||
       categoryError ||
       productQualityError ||
       descriptionError
     );
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    const hasErrors = handleErrors();
-    if (hasErrors) return;
+  const hasErrors = handleErrors();
+  if (hasErrors) return;
 
-    setSubmitMessage("Creating Auction...");
 
-    let { status, message } = await createNewAuction(auctionForm);
-    if (status) {
-      alert(message);
-      navigate("/user/myauction");
-    } else {
-      alert(message);
-    }
+  const hours = Number(auctionForm.endTime); 
+  const now = new Date();
+  const endTimeDate = new Date(now.getTime() + hours * 60 * 60 * 1000);
+
+ 
+  const updatedAuction = {
+    ...auctionForm,
+    endTime: endTimeDate.toISOString(), 
   };
+
+  setAuctionForm(updatedAuction); 
+
+  setSubmitMessage("Creating Auction...");
+
+  let { status, message } = await createNewAuction(updatedAuction);
+  if (status) {
+    alert(message);
+    navigate("/user/myauction");
+  } else {
+    alert(message);
+  }
+};
+
 
   return (
     <div
@@ -162,7 +179,6 @@ const CreateAuction = () => {
               value={auctionForm.startingPrice}
               onChange={handleInput}
               placeholder="Enter your password"
-              min={1000}
             />
             <label className="ps-4">Starting Price:</label>
             {errorMsg.startingPriceError !== "" && (
@@ -174,20 +190,18 @@ const CreateAuction = () => {
           <div className="mb-3 form-floating col-md-6">
             <input
               type="number"
-              name="duration"
+              name="endTime"
               id="time"
               className="form-control"
-              value={auctionForm.duration}
+              value={auctionForm.endTime}
               onChange={handleInput}
               placeholder="Time"
-              min={10}
-              max={48}
             />
             <label htmlFor="contact" className="ps-4">
-              Duration:
+              End Time:
             </label>
-            {errorMsg.durationError !== "" && (
-              <span className="text-danger">{errorMsg.durationError}</span>
+            {errorMsg.endTimeError !== "" && (
+              <span className="text-danger">{errorMsg.endTimeError}</span>
             )}
           </div>
 

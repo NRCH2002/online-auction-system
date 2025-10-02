@@ -1,7 +1,12 @@
 import "../styles/auctionCard.css";
 import type { AuctionType } from "../types/AuctionType";
 import { useNavigate } from "react-router-dom";
-import { auctionCountdown } from "../services/auctionCountdown";
+import { useCountDown } from "../services/useCountDown";
+import { updateAuctionStatus } from "../services/updateAuctionStatus";
+import { useEffect } from "react";
+import { useAuctionContext } from "../context/AuctionContext";
+import type { BidType } from "../types/BidType";
+import { useAuth } from "../context/AuthContext";
 
 type AuctionItemProps = {
   auctionItem: AuctionType;
@@ -9,7 +14,42 @@ type AuctionItemProps = {
 
 const AuctionCard = ({ auctionItem }: AuctionItemProps) => {
   let navigate = useNavigate();
- const timeLeft = auctionCountdown(auctionItem.duration, auctionItem.createdAt);
+ const timeLeft = useCountDown(auctionItem.endTime)
+ const {auctionItems,setAuctionItems} = useAuctionContext()
+ const {user,setUser} = useAuth()
+ console.log(timeLeft)
+
+
+useEffect(() => {
+  if (timeLeft === "Action completed") {
+    updateAuctionStatus({...auctionItem, endTime:"Action completed" }).then((updatedAuction) => {
+      if (updatedAuction) {
+        const updatedAuctions = auctionItems.map((auction:AuctionType) =>
+          auction.auctionId === updatedAuction.auctionId ? updatedAuction : auction
+        );
+        setAuctionItems(updatedAuctions);
+      }
+    }); 
+
+    //update user status if needed
+    if(auctionItem.status==="sold"){
+
+      const winningBid = user?.bids.find((bid:BidType) => bid.auctionId === auctionItem.auctionId && bid.status === "ongoing");
+      if(winningBid && user){
+        const updatedBids = user.bids.map((bid:BidType) => 
+          bid.auctionId === auctionItem.auctionId ? { ...bid, status: "won" } : bid
+        );
+        setUser({ ...user, bids: updatedBids });
+      }
+
+    
+
+    }
+
+  
+  }
+}, [timeLeft]);
+
  
   return (
     <div className="product-card">
@@ -40,21 +80,14 @@ const AuctionCard = ({ auctionItem }: AuctionItemProps) => {
           </div>
 
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <div className="d-flex align-items-center text-muted info-text">
-              <svg className="bid-icon" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              {auctionItem.bidCount} bids
+            <div className="d-flex gap-2 text-orange fs-small">
+              <i className="bi bi-people-fill text-warning"></i>
+              <p className="text-black fw-bold">{auctionItem.bidCount} bids</p>
             </div>
-            <div className="d-flex align-items-center text-orange info-text">
-              <svg className="time-icon" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              {timeLeft}
+            <div className="d-flex gap-2 text-orange fs-small">
+              <i className="bi bi-clock text-orange "></i>
+              <p className="fw-bold">{timeLeft}</p>
+              
             </div>
           </div>
 

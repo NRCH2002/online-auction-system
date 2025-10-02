@@ -274,6 +274,8 @@ let activity ={
                 <button
                   type="button"
                   className="btn btn-danger ms-2"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
                   onClick={() => {
                     logout();
                     navigate("/");

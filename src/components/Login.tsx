@@ -4,21 +4,28 @@ import { useNavigate } from "react-router-dom";
 import type { UserInputType } from "../types/UserInputType";
 
 function Login() {
-  let navigate = useNavigate();
-  let { login, user } = useAuth(); //stores user after validate
+  const navigate = useNavigate();
+  const { login, user } = useAuth();
 
-  let [userInput, setUserInput] = useState<UserInputType>({
+  const [userInput, setUserInput] = useState<UserInputType>({
     role: "user",
     email: "",
     password: "",
   });
-  let [errorMsg, setErrorMsg] = useState({ emailError: "", passwordError: "" });
 
-  const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = e.target;
+  const [errorMsg, setErrorMsg] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginMsg, setLoginMsg] = useState<null | string>(null);
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setUserInput({ ...userInput, [name]: value });
     setErrorMsg({ ...errorMsg, [`${name}Error`]: "" });
-
+    setLoginMsg(null);
   };
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -26,24 +33,33 @@ function Login() {
 
     let emailError = "";
     let passwordError = "";
-    if (!userInput.email.trim())  emailError = "Email is required";
+
+    if (!userInput.email.trim()) emailError = "Email is required";
     if (!userInput.password.trim()) passwordError = "Password is required";
-     
+
     setErrorMsg({ emailError, passwordError });
- 
+
     if (emailError || passwordError) return;
-   
-    let { success } = await login(userInput);
+
+    const { success } = await login(userInput);
     if (success) {
-      if (user?.role === "user") {
+      setLoginMsg("Login successful!");
+      setTimeout(() => {
+        if (user?.role === "user") {
         navigate("/user/dashboard");
       } else {
         navigate("/admin/dashboard");
       }
+        setLoginMsg(null);
+
+      }, 1000);
+      
     } else {
-      alert(`Invalid credentials`);
+      setLoginMsg("Login failed. Please check your credentials.");
     }
   };
+
+  console.log("login...")
 
   return (
     <div
@@ -51,46 +67,48 @@ function Login() {
         maxWidth: "400px",
         margin: "2rem auto",
         padding: "2rem",
-        border: "1px solid #ccc",
+        background: "white",
         borderRadius: "8px",
       }}
+      className="shadow"
     >
-      <h2 className="text-center mb-5">Login to Continue</h2>
-      <form onSubmit={handleLogin}>
-        <div className="">
-          <label>Select your Role:</label>
-          <div className="d-flex ms-2 gap-2 mb-2">
-            <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="role"
-              id="user"
-              value="user"
-              onChange={handleInput}
-              checked={userInput.role === "user"}
-            />
-            <label className="form-check-label" htmlFor="user">
-              User
-            </label>
-          </div>
+      <h4 className="text-center mb-5 fw-bold">Login to Continue</h4>
 
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="role"
-              id="admin"
-              value="admin"
-              onChange={handleInput}
-              checked={userInput.role === "admin"}
-            />
-            <label className="form-check-label" htmlFor="admin">
-              Admin
-            </label>
+      <form onSubmit={handleLogin}>
+        {/* <div className="mb-3">
+          <label>Select your Role:</label>
+          <div className="d-flex ms-2 gap-2">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="user"
+                value="user"
+                onChange={handleInput}
+                checked={userInput.role === "user"}
+              />
+              <label className="form-check-label" htmlFor="user">
+                User
+              </label>
+            </div>
+
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="role"
+                id="admin"
+                value="admin"
+                onChange={handleInput}
+                checked={userInput.role === "admin"}
+              />
+              <label className="form-check-label" htmlFor="admin">
+                Admin
+              </label>
+            </div>
           </div>
-          </div>
-        </div>
+        </div> */}
 
         <div className="form-floating mb-3">
           <input
@@ -101,32 +119,55 @@ function Login() {
             onChange={handleInput}
             placeholder="Enter your email"
           />
-          <label>Enter your email</label>
-          {errorMsg.emailError !== "" && (
+          <label htmlFor="email">Enter your email</label>
+          {errorMsg.emailError && (
             <span className="text-danger">{errorMsg.emailError}</span>
           )}
         </div>
 
-        <div className="form-floating mb-3">
+        <div className="form-floating mb-3 position-relative">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             className="form-control"
             name="password"
             value={userInput.password}
             onChange={handleInput}
             placeholder="Enter your password"
           />
-          <label>Enter your password</label>
-          {errorMsg.passwordError !== "" && (
+          <label htmlFor="password">Enter your password</label>
+          <div
+            className="position-absolute"
+            style={{
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+            }}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`} />
+          </div>
+          {errorMsg.passwordError && (
             <span className="text-danger">{errorMsg.passwordError}</span>
           )}
         </div>
+
+        {loginMsg && (
+        <p
+          className={`text-center fw-bold ${
+            loginMsg.includes("successful") ? "text-success" : "text-danger"
+          }`}
+        >
+          {loginMsg.includes("successful") ? `Welcome Back! ${user?.name}`: loginMsg}
+        </p>
+        
+      )}
+      
 
         <button type="submit" className="btn btn-orange w-100">
           Login
         </button>
 
-        {/* Navigate to Login */}
         <p className="grey-text mt-2 text-center">
           Don't have an account?
           <button

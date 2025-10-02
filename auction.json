@@ -38,17 +38,24 @@
       },
       "bids": [
         {
-          "bidId": "bidITng",
-          "auctionId": "auction_E9iY",
-          "bidAmount": 5000,
-          "time": "9:23:38 PM",
-          "status": "won"
+          "bidId": "bidQYoi",
+          "auctionId": "auction_RLX1",
+          "bidAmount": "8050",
+          "time": "9:51:53 PM",
+          "status": "discarded"
         },
         {
-          "bidId": "bidtM5r",
-          "auctionId": "auction_6Feh",
-          "bidAmount": 2352,
-          "time": "2:41:32 pm",
+          "bidId": "bidJxIu",
+          "auctionId": "auction_HOM1",
+          "bidAmount": "2300",
+          "time": "9:52:27 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidwhNW",
+          "auctionId": "auction_ART1",
+          "bidAmount": "34000",
+          "time": "9:52:59 PM",
           "status": "ongoing"
         }
       ],
@@ -73,28 +80,43 @@
       },
       "bids": [
         {
-          "bidId": "bidOObk",
-          "auctionId": "auction_6Feh",
-          "bidAmount": 2351,
-          "time": "7:29:38 PM",
+          "bidId": "bidK2oC",
+          "auctionId": "auction_ELC1",
+          "bidAmount": "2000",
+          "time": "9:55:03 PM",
           "status": "discarded"
         },
         {
-          "bidId": "bidIkqw",
-          "auctionId": "auction_12Ez",
-          "bidAmount": 2005,
-          "time": "8:13:04 PM",
-          "status": "discarded"
-        },
-        {
-          "bidId": "bid88on",
-          "auctionId": "auction_12Ez",
-          "bidAmount": 2007,
-          "time": "8:13:58 PM",
+          "bidId": "bid8Idu",
+          "auctionId": "auction_dNR3",
+          "bidAmount": "3500",
+          "time": "10:01:23 PM",
           "status": "ongoing"
+        },
+        {
+          "bidId": "bidoKxI",
+          "auctionId": "auction_6Feh",
+          "bidAmount": "20000",
+          "time": "10:02:13 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidJHIJ",
+          "auctionId": "auction_1JuI",
+          "bidAmount": "650",
+          "time": "10:34:24 pm",
+          "status": "won"
         }
       ],
-      "payments": [],
+      "payments": [
+        {
+          "paymentId": "payment_c4fI",
+          "auctionId": "auction_1JuI",
+          "amount": "650",
+          "status": "pending",
+          "paymentDate": "2025-10-01T17:33:16.215Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -113,8 +135,52 @@
         "pincode": "632519",
         "country": "india"
       },
-      "bids": [],
-      "payments": [],
+      "bids": [
+        {
+          "bidId": "bidIhOj",
+          "auctionId": "auction_VG3",
+          "bidAmount": "55000",
+          "time": "10:05:18 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidTEiJ",
+          "auctionId": "auction_fxLc",
+          "bidAmount": "2000",
+          "time": "10:05:42 PM",
+          "status": "won"
+        },
+        {
+          "bidId": "bidbqW0",
+          "auctionId": "auction_KXIh",
+          "bidAmount": "4550",
+          "time": "10:06:04 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidGGHt",
+          "auctionId": "auction_E9iY",
+          "bidAmount": "5550",
+          "time": "10:06:32 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidn8Dq",
+          "auctionId": "auction_ELC1",
+          "bidAmount": "3000",
+          "time": "8:53:41 AM",
+          "status": "ongoing"
+        }
+      ],
+      "payments": [
+        {
+          "paymentId": "payment_r6im",
+          "auctionId": "auction_fxLc",
+          "amount": "2000",
+          "status": "pending",
+          "paymentdate": "2025-10-02T01:36:49.181Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -135,40 +201,27 @@
       },
       "bids": [
         {
-          "bidId": "bidqxea",
-          "auctionId": "auction_8PWW",
-          "bidAmount": 399292,
-          "time": "7:15:39 PM",
+          "bidId": "bidlWY6",
+          "auctionId": "auction_RLX1",
+          "bidAmount": "9000",
+          "time": "10:03:28 PM",
           "status": "ongoing"
         },
         {
-          "bidId": "bidt1Wu",
-          "auctionId": "auction_12Ez",
-          "bidAmount": 2006,
-          "time": "8:13:34 PM",
-          "status": "discarded"
+          "bidId": "bidGoHb",
+          "auctionId": "auction_VASE2",
+          "bidAmount": "33000",
+          "time": "10:03:41 PM",
+          "status": "ongoing"
+        },
+        {
+          "bidId": "bidUhIZ",
+          "auctionId": "auction_Byen",
+          "bidAmount": "2600",
+          "time": "10:04:02 PM",
+          "status": "ongoing"
         }
       ],
-      "payments": [],
-      "reviews": []
-    },
-    {
-      "id": "4b25",
-      "userId": "user_ndMV",
-      "name": "tester user",
-      "email": "test@gmail.com",
-      "password": "test",
-      "contact": "999999999",
-      "gender": "female",
-      "role": "user",
-      "address": {
-        "addressline": "texus",
-        "city": "texus",
-        "state": "texus",
-        "pincode": "506372",
-        "country": "usa"
-      },
-      "bids": [],
       "payments": [],
       "reviews": []
     }
@@ -183,11 +236,12 @@
       "category": "Watches",
       "description": "Classic 1960s model in excellent condition.",
       "startingPrice": 8000,
-      "currentBid": 12500,
-      "bidCount": 15,
+      "currentBid": "9000",
+      "bidCount": 2,
       "productQuality": "Excellent",
-      "duration": "48",
-      "status": "active"
+      "endTime": "2025-10-03T14:13:20.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:13:20.000Z"
     },
     {
       "id": "105",
@@ -198,11 +252,12 @@
       "category": "Electronics & Gadgets",
       "description": "Latest 14-inch MacBook Pro with M2 chip.",
       "startingPrice": 1500,
-      "currentBid": 2100,
-      "bidCount": 17,
+      "currentBid": "3000",
+      "bidCount": 2,
       "productQuality": "excellent",
-      "duration": "36",
-      "status": "active"
+      "endTime": "2025-10-04T02:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:00:00.000Z"
     },
     {
       "id": "2",
@@ -213,11 +268,12 @@
       "category": "Antiques",
       "description": "Authentic 15th-century blue & white ceramic.",
       "startingPrice": 15000,
-      "currentBid": 28000,
-      "bidCount": 23,
+      "currentBid": "33000",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "36",
-      "status": "active"
+      "endTime": "2025-10-03T16:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:00:00.000Z"
     },
     {
       "id": "3",
@@ -228,11 +284,12 @@
       "category": "Art & Collectibles",
       "description": "Rare authenticated oil-on-canvas study.",
       "startingPrice": 50000,
-      "currentBid": 75000,
-      "bidCount": 8,
+      "currentBid": "55000",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "72",
-      "status": "active"
+      "endTime": "2025-10-03T14:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:00:00.000Z"
     },
     {
       "id": "4",
@@ -243,11 +300,12 @@
       "category": "Jewelry",
       "description": "2-carat diamond ring in platinum setting.",
       "startingPrice": 5000,
-      "currentBid": 7200,
-      "bidCount": 12,
+      "currentBid": 0,
+      "bidCount": 0,
       "productQuality": "Excellent",
-      "duration": "18",
-      "status": "active"
+      "endTime": "Action completed",
+      "status": "unsold",
+      "createdAt": "2025-10-01T04:00:00.000Z"
     },
     {
       "id": "106",
@@ -258,86 +316,93 @@
       "category": "Home & Furniture",
       "description": "Stylish vintage mid-century modern 3-seater sofa.",
       "startingPrice": 2000,
-      "currentBid": 2460,
-      "bidCount": 8,
+      "currentBid": "2300",
+      "bidCount": 1,
       "productQuality": "excellent",
-      "duration": "48",
-      "status": "active"
+      "endTime": "2025-10-03T14:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:00:00.000Z"
     },
     {
       "id": "9",
       "userId": "user_ukN8",
       "auctionId": "auction_Byen",
-      "imageUrl": "https://images.unsplash.com/photo-1667013829325-be7dac7d03eb?...",
+      "imageUrl": "https://images.unsplash.com/photo-1667013829325-be7dac7d03eb",
       "title": "Ruby Cocktail Ring",
       "category": "Jewelry",
       "description": "Bold ruby ring with diamond accents in white gold.",
       "startingPrice": 2500,
-      "currentBid": 3400,
-      "bidCount": 9,
+      "currentBid": "2600",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "10",
-      "status": "active"
+      "endTime": "2025-10-03T20:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T10:00:00.000Z"
     },
     {
       "id": "10",
       "userId": "user_0mL8",
       "auctionId": "auction_6Feh",
-      "imageUrl": "https://images.unsplash.com/photo-1583937443351-f2f669fbe2cf?...",
+      "imageUrl": "https://images.unsplash.com/photo-1583937443351-f2f669fbe2cf",
       "title": "Emerald Pendant",
       "category": "Jewelry",
       "description": "Exquisite emerald pendant on delicate gold chain.",
-      "startingPrice": 1800,
-      "currentBid": 2352,
-      "bidCount": 13,
+      "startingPrice": 18000,
+      "currentBid": "20000",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "17",
-      "status": "active"
+      "endTime": "2025-10-03T23:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T10:00:00.000Z",
+      "duration": 34
     },
     {
       "id": "11",
       "userId": "user_ukN8",
       "auctionId": "auction_fxLc",
-      "imageUrl": "https://images.unsplash.com/photo-1630019852942-f89202989a59?...",
+      "imageUrl": "https://images.unsplash.com/photo-1630019852942-f89202989a59",
       "title": "Sapphire Stud Earrings",
       "category": "Jewelry",
       "description": "Royal blue sapphires in classic stud settings.",
       "startingPrice": 1500,
-      "currentBid": 2100,
-      "bidCount": 7,
+      "currentBid": "2000",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "20",
-      "status": "active"
+      "endTime": "Action completed",
+      "status": "sold",
+      "createdAt": "2025-10-01T12:00:00.000Z"
     },
     {
       "id": "12",
       "userId": "user_mffY",
       "auctionId": "auction_dNR3",
-      "imageUrl": "https://images.unsplash.com/photo-1726981407933-06fe96c4cefa?...",
+      "imageUrl": "https://images.unsplash.com/photo-1726981407933-06fe96c4cefa",
       "title": "Rose Gold Watch",
       "category": "Watches",
       "description": "Luxury timepiece with rose gold case and leather band.",
       "startingPrice": 3200,
-      "currentBid": 4750,
-      "bidCount": 18,
+      "currentBid": "3500",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "36",
-      "status": "active"
+      "endTime": "2025-10-03T14:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:00:00.000Z"
     },
     {
       "id": "15",
       "userId": "user_q773",
       "auctionId": "auction_KXIh",
-      "imageUrl": "https://images.unsplash.com/photo-1639065643006-e217c4fee12e?...",
+      "imageUrl": "https://images.unsplash.com/photo-1639065643006-e217c4fee12e",
       "title": "Diamond Tennis Bracelet",
       "category": "Jewelry",
       "description": "Sparkling tennis bracelet with perfect diamond line.",
       "startingPrice": 4500,
-      "currentBid": 6200,
-      "bidCount": 22,
+      "currentBid": "4550",
+      "bidCount": 1,
       "productQuality": "Excellent",
-      "duration": "30",
-      "status": "active"
+      "endTime": "2025-10-03T22:00:00.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:00:00.000Z"
     },
     {
       "id": "864f",
@@ -347,13 +412,13 @@
       "title": "Rolex Vintage Retro",
       "category": "Watches",
       "description": "Stylish Retro Vintage Rolex ",
-      "startingPrice": "5000",
-      "currentBid": 5000,
+      "startingPrice": 5000,
+      "currentBid": "5550",
       "bidCount": 1,
       "productQuality": "excellent",
-      "duration": "12",
-      "status": "sold",
-      "createdAt": "9:06:11 PM"
+      "endTime": "2025-10-03T21:06:11.000Z",
+      "status": "active",
+      "createdAt": "2025-10-01T09:06:11.000Z"
     },
     {
       "id": "f9e3",
@@ -363,13 +428,13 @@
       "title": "Yellow vintage car",
       "category": "Vechices",
       "description": "Yellow vintage car model 1957 model",
-      "startingPrice": "7000",
+      "startingPrice": 7000,
       "currentBid": 0,
       "bidCount": 0,
       "productQuality": "excellent",
-      "duration": "36",
-      "status": "unsold",
-      "createdAt": "9:25:56 PM"
+      "endTime": "2025-10-03T14:13:20.906Z",
+      "status": "active",
+      "createdAt": "2025-09-29T14:13:20.906Z"
     },
     {
       "id": "103",
@@ -380,11 +445,12 @@
       "category": "Art & Collectibles",
       "description": "Authentic signed limited-edition lithograph.",
       "startingPrice": 12000,
-      "currentBid": 15300,
-      "bidCount": 6,
+      "currentBid": "34000",
+      "bidCount": 1,
       "productQuality": "excellent",
-      "duration": "72",
-      "status": "active"
+      "endTime": "2025-10-03T14:13:20.906Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:13:20.906Z"
     },
     {
       "id": "104",
@@ -395,11 +461,28 @@
       "category": "Fashion & Accessories",
       "description": "Classic black leather handbag with gold accents.",
       "startingPrice": 1200,
-      "currentBid": 1875,
-      "bidCount": 14,
+      "currentBid": 0,
+      "bidCount": 0,
       "productQuality": "excellent",
-      "duration": "30",
-      "status": "active"
+      "endTime": "2025-10-04T14:13:20.906Z",
+      "status": "active",
+      "createdAt": "2025-10-01T14:13:20.906Z"
+    },
+    {
+      "id": "1597",
+      "auctionId": "auction_1JuI",
+      "userId": "user_0mL8",
+      "imageUrl": "https://images.unsplash.com/photo-1648564585735-19491888545c?...",
+      "title": "phone",
+      "category": "Electronics & Gadgets",
+      "description": "iphone",
+      "startingPrice": "600",
+      "currentBid": "650",
+      "bidCount": 1,
+      "productQuality": "excellent",
+      "endTime": "Action completed",
+      "status": "sold",
+      "createdAt": "2025-10-01T16:56:45.727Z"
     }
   ]
 }

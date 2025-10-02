@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         else {
           const postUser = await postUsers(userDetails);
           if (postUser) {
-            setUser({...postUser})
+            setUser(postUser)
             return { success: true, message: "Sucessfully registered" }
           }
           else{
@@ -58,12 +58,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   if(validUser){
     if((validUser)&&(validUser.role === "user")){
       setUser({...validUser})
-      alert(`Welcome ${validUser.name}`)
       return({success:true,message:"User login Successful"})
     }
     else{
       setUser({...validUser})
-      alert(`Welcome ${validUser.name}`)
       return({success:true,message:"Admin login Successful"})
     }}
    else{

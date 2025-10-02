@@ -21,8 +21,8 @@ export type UserType ={
             status:string
          }[]; 
     payments: {
-            paymentid:string,
-            paymentdate:string,
+            paymentId:string,
+            paymentDate:string,
             auctionId:string,
             amount:number,
             status:string

@@ -10,7 +10,7 @@ export type AuctionType = {
   currentBid: number;
   bidCount: number;
   productQuality:string;
-  duration: string;
+  endTime: string;
   status:string;
   createdAt:string;
   updatedAt?:string

@@ -21,6 +21,7 @@ import ManageBids from "../components/admin/ManageBids";
 import ManageUsers from "../components/admin/ManageUsers";
 import RootLayout from "../components/RootLayout";
 import ViewAuction from "../components/user/ViewAuction";
+import NotFound from "../components/errors/NotFound";
 
 export const Routes = () => {
 
@@ -77,6 +78,10 @@ export const Routes = () => {
         },
       ],
     },
+     {
+    path: "*",
+    element: <NotFound />,
+  },
   ]);
 
   return <RouterProvider router={router} />;

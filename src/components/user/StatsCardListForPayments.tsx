@@ -1,16 +1,18 @@
+
 import "../../styles/statsCardList.css";
 import type { AuctionType } from "../../types/AuctionType";
-import type { BidType } from "../../types/BidType";
 import { useState, type ChangeEvent } from "react";
+import type { PaymentType } from "../../types/PaymentType";
 
 type StatsCardListProps = {
   auctionItem: AuctionType;
-  bid: BidType;
+  payment: PaymentType;
 };
 
-function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
+function StatsCardListForPayments({ auctionItem, payment }: StatsCardListProps) {
 
   const [showModal, setShowModal] = useState(false);
+
   const [paymentData, setPaymentData] = useState({
     paymentMethod: "card",
     cardNumber: "",
@@ -21,8 +23,8 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
 
   // Platform charge (5% of bid amount)
   const platformChargeRate = 0.01;
-  const platformCharge = bid.bidAmount * platformChargeRate;
-  const totalPayable = bid.bidAmount + platformCharge;
+  const platformCharge = Number(payment.amount) * platformChargeRate;
+  const totalPayable = Number(payment.amount) + platformCharge;
 
   const inputHandle = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,13 +35,6 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
   };
 
   const confirmPayment = async () => {
-    console.log("Payment confirmed:", {
-      ...paymentData,
-      bidAmount: bid.bidAmount,
-      platformCharge,
-      totalPayable,
-    });
-    // TODO: Call backend API to process payment here
     setShowModal(false);
   };
 
@@ -47,7 +42,7 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
     <div>
       <div
         className="card border-1 rounded-4 shadow-sm overflow-hidden mx-auto"
-        style={{ maxWidth: "24rem" }}
+        style={{ maxWidth: "24rem",minHeight:"540px" }}
       >
         <div className="position-relative" style={{ height: "12rem" }}>
           <img
@@ -57,15 +52,15 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
           />
           <span
             className={`badge position-absolute top-0 start-0 m-3 rounded-pill px-2 py-1 fw-semibold ${
-              bid.status.toLowerCase() === "ongoing"
+              payment.status.toLowerCase() === "pending"
                 ? "bg-warning"
-                : bid.status.toLowerCase() === "won"
+                : payment.status.toLowerCase() === "completed"
                 ? "bg-success"
                 : "bg-danger"
             }`}
             style={{ fontSize: "0.75rem" }}
           >
-            {bid.status}
+            {payment.status}
           </span>
           <span
             className="badge bg-orange text-white position-absolute top-0 end-0 m-3 rounded-pill px-2 py-1 fw-semibold"
@@ -84,7 +79,7 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
             {auctionItem.description}
           </p>
 
-          {bid.status === "won" && (
+          {payment.status === "pending" && (
             <>
               <div className="row mb-4">
                 <div className="col-6 text-center">
@@ -98,7 +93,7 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
                     Your Bidding
                   </p>
                   <p className="fs-4 fw-bold text-dark mb-0">
-                    ${bid.bidAmount.toLocaleString()}
+                    ${payment.amount.toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -139,7 +134,7 @@ function StatsCardListForPayments({ auctionItem, bid }: StatsCardListProps) {
                   <ul className="list-group">
                     <li className="list-group-item d-flex justify-content-between">
                       <span>Bid Amount:</span>
-                      <strong>${bid.bidAmount.toLocaleString()}</strong>
+                      <strong>${payment.amount.toLocaleString()}</strong>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                       <span>Platform Charges (1%):</span>

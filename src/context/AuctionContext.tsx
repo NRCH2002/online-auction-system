@@ -1,52 +1,55 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+
+import { useEffect, useState, createContext, useContext, type ReactNode } from "react";
 import type { AuctionType } from "../types/AuctionType";
+import { getAuctions } from "../services/getAuctions";
 import { postAuctions } from "../services/postAuctions";
-// import { useAuth } from "./AuthContext";
-// import { patchUser } from "../services/patchUser";
 
+type AuctionContextType = {
+  auctionItems: AuctionType[];
+  setAuctionItems: (arr: AuctionType[]) => void;
+  createNewAuction: (obj: AuctionType) => Promise<{ status: boolean; message: string }>;
+  refetchAuctions: () => Promise<void>;
+};
 
-type AuctionContextType ={
-    auctionItems:AuctionType[];
-    setAuctionItems:(arr:AuctionType[])=>void;
-    createNewAuction:(obj:AuctionType)=>Promise<{ status: boolean; message: string; }>
-}
+export const AuctionContext = createContext<AuctionContextType | undefined>(undefined);
 
-export let AuctionContext = createContext<AuctionContextType|undefined>(undefined)
+export function AuctionProvider({ children }: { children: ReactNode }) {
+  const [auctionItems, setAuctionItems] = useState<AuctionType[]>([]);
 
-export function AuctionProvider({children}: { children: ReactNode }){
+ 
+  useEffect(() => {
+    const fetchInitialAuctions = async () => {
+      const data = await getAuctions();
+      if (data) setAuctionItems(data);
+    };
+    fetchInitialAuctions();
+  }, [auctionItems]);
 
-//    let {user,setUser} = useAuth()
+ 
+  const refetchAuctions = async () => {
+    const data = await getAuctions();
+    if (data) setAuctionItems(data);
+  };
 
-    let [auctionItems,setAuctionItems] = useState<AuctionType[]>([])
-
-    const createNewAuction= async (newAuction:AuctionType):Promise<{ status: boolean; message: string; }>=>{
-        let newAuctionObj = await postAuctions(newAuction) 
-        if(newAuctionObj){
-            setAuctionItems([...auctionItems,newAuction])
-            return{status:true,message:"Auction Created Successfully"}
-            // if (newAuction.auctionId && user) {
-            // let res = await patchUser(user,newAuction)
-            //     if (res) {
-            //         setUser(res);
-            //         return{status:true,message:"Auction Created Successfully"}
-            //     }
-            //     return{status:false,message:"Auction is Created but User is Not Updated!"}     
-            // }
-            // else {
-            //     return{status:false,message:"Auction is Created but User is Not Updated!"}
-            //  }
-            
-        }else{
-           return {status:false,message:"Auction is Not Created!"}
-        }
-
+  const createNewAuction = async (newAuction: AuctionType): Promise<{ status: boolean; message: string }> => {
+    const newAuctionObj = await postAuctions(newAuction);
+    if (newAuctionObj) {
+      await refetchAuctions(); // refresh after creation
+      return { status: true, message: "Auction Created Successfully" };
+    } else {
+      return { status: false, message: "Auction is Not Created!" };
     }
+  };
 
-    return(<AuctionContext.Provider value={{auctionItems,setAuctionItems,createNewAuction}}>{children}</AuctionContext.Provider>)
+  return (
+    <AuctionContext.Provider value={{ auctionItems, setAuctionItems, createNewAuction, refetchAuctions }}>
+      {children}
+    </AuctionContext.Provider>
+  );
 }
 
-export function useAuctionContext(){
-    let context= useContext(AuctionContext)
-     if (!context) throw new Error("useAuctionContext must be used within AuctionProvider");
-    return context
+export function useAuctionContext() {
+  const context = useContext(AuctionContext);
+  if (!context) throw new Error("useAuctionContext must be used within AuctionProvider");
+  return context;
 }
